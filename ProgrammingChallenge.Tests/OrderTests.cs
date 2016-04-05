@@ -119,5 +119,26 @@ namespace com.exam.tests
             Assert.Contains(order.GetItems(), (oi) => oi.ItemType == OrderItemType.Material);
             Assert.Contains(order.GetItems(), (oi) => oi.Quantity == 2);
         }
+
+        [Fact]
+        public void ShouldReturnTotalCostOfAllOrderItems()
+        {
+            var items = new OrderItem[] {
+                new OrderItem {
+                    Item = new Item(1, "item1", .01m),
+                    ItemType =OrderItemType.Material,
+                    Quantity =1 },
+                new OrderItem {
+                    Item = new Item(2, "item2", .02m),
+                    ItemType =OrderItemType.Material ,
+                    Quantity =2
+                }
+            };
+
+            var order = new Order(items);
+
+            Assert.NotEqual(0, order.GetOrderTotal(0));
+            Assert.Equal(.05m, order.GetOrderTotal(0));
+        }
     }
 }
