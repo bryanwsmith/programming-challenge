@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace com.exam
 {
+    [Serializable]
     public class OrderItem
     {
         public Item Item { get; set; }

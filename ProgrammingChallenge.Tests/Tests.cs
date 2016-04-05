@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 using System.Reflection;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace com.exam.tests
 {
@@ -63,6 +65,47 @@ namespace com.exam.tests
 
             items[0] = null;
             items[1] = null;
+
+            Assert.Contains(order.GetItems(), (oi) => oi.Item.Key == 1);
+            Assert.Contains(order.GetItems(), (oi) => oi.Item.Name == "item1");
+            Assert.Contains(order.GetItems(), (oi) => oi.Item.Price == .01m);
+            Assert.Contains(order.GetItems(), (oi) => oi.ItemType == OrderItemType.Material);
+            Assert.Contains(order.GetItems(), (oi) => oi.Quantity == 1);
+
+            Assert.Contains(order.GetItems(), (oi) => oi.Item.Key == 2);
+            Assert.Contains(order.GetItems(), (oi) => oi.Item.Name == "item2");
+            Assert.Contains(order.GetItems(), (oi) => oi.Item.Price == .02m);
+            Assert.Contains(order.GetItems(), (oi) => oi.ItemType == OrderItemType.Material);
+            Assert.Contains(order.GetItems(), (oi) => oi.Quantity == 2);
+        }
+
+        [Fact]
+        public void ShouldSerializeOrderItems()
+        {
+            var items = new OrderItem[] {
+                new OrderItem {
+                    Item = new Item(1, "item1", .01m),
+                    ItemType =OrderItemType.Material,
+                    Quantity =1 },
+                new OrderItem {
+                    Item = new Item(2, "item2", .02m),
+                    ItemType =OrderItemType.Material ,
+                    Quantity =2
+                }
+            };
+
+            var order = new Order(items);
+
+            var formatter = new BinaryFormatter();
+            var stream = new MemoryStream();
+
+            formatter.Serialize(stream, order);
+
+            order = null;
+
+            stream.Seek(0, SeekOrigin.Begin);
+
+            order = formatter.Deserialize(stream) as Order;
 
             Assert.Contains(order.GetItems(), (oi) => oi.Item.Key == 1);
             Assert.Contains(order.GetItems(), (oi) => oi.Item.Name == "item1");

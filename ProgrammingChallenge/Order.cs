@@ -18,6 +18,7 @@ namespace com.exam
      * @author Joe Blow
      * @version 1.0
      */
+    [Serializable]
     public class Order
     {
         private OrderItem[] orderItems;
