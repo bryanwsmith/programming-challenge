@@ -24,7 +24,18 @@ namespace com.exam
 
         public Order(OrderItem[] orderItems)
         {
-            this.orderItems = orderItems;
+            this.orderItems = Clone(orderItems);
+        }
+
+        private OrderItem[] Clone(OrderItem[] orderItems)
+        {
+            return orderItems.Select(i => new OrderItem()
+            {
+                Item = new Item(i.Item.Key, i.Item.Name, i.Item.Price),
+                ItemType = i.ItemType,
+                Quantity = i.Quantity
+            }
+            ).ToArray();
         }
 
         // Returns the total order cost after the tax has been applied
@@ -41,7 +52,7 @@ namespace com.exam
          */
         public List<OrderItem> GetItems()
         {
-            return orderItems.ToList();  // implement this method
+            return orderItems.ToList();
         }
     }
 }

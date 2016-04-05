@@ -30,6 +30,11 @@ namespace com.exam
             this.Name = name;
             this.Price = price;
         }
+
+        public Item Clone()
+        {
+            return new Item(Key, Name, Price);
+        }
     }
 }
 
