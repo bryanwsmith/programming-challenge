@@ -43,7 +43,10 @@ namespace com.exam
         public decimal GetOrderTotal(decimal taxRate)
         {
             var total = orderItems.Aggregate(0.0m, (sum, item) => sum + item.GetItemTotal());
-            total = (decimal) total+(total * taxRate);
+            var taxableAmount = orderItems
+                .Where((item) => item.ItemType == OrderItemType.Material)
+                .Aggregate(0.0m, (sum, item) => sum + item.GetItemTotal());
+            total = (decimal)total + (taxableAmount * taxRate);
             return Math.Round(total, 2, MidpointRounding.AwayFromZero);
         }
 

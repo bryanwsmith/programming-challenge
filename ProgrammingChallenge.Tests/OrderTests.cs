@@ -201,5 +201,47 @@ namespace com.exam.tests
             Assert.NotEqual(.52m, order.GetOrderTotal(0.07m));
             Assert.Equal(.54m, order.GetOrderTotal(0.07m));
         }
+
+        [Fact]
+        public void ShouldNotCalculateTaxesForServiceOrderItems()
+        {
+            var items = new OrderItem[] {
+                new OrderItem {
+                    Item = new Item(1, "item1", .10m),
+                    ItemType =OrderItemType.Service,
+                    Quantity =1 },
+                new OrderItem {
+                    Item = new Item(2, "item2", .20m),
+                    ItemType =OrderItemType.Service ,
+                    Quantity =2
+                }
+            };
+
+            var order = new Order(items);
+
+            Assert.NotEqual(1m, order.GetOrderTotal(1m));
+            Assert.Equal(.5m, order.GetOrderTotal(1m));
+        }
+
+        [Fact]
+        public void ShouldOnlyCalculateTaxesForMaterialOrderItems()
+        {
+            var items = new OrderItem[] {
+                new OrderItem {
+                    Item = new Item(1, "item1", .10m),
+                    ItemType =OrderItemType.Service,
+                    Quantity =1 },
+                new OrderItem {
+                    Item = new Item(2, "item2", .20m),
+                    ItemType =OrderItemType.Material ,
+                    Quantity =2
+                }
+            };
+
+            var order = new Order(items);
+
+            Assert.NotEqual(1m, order.GetOrderTotal(1m));
+            Assert.Equal(.9m, order.GetOrderTotal(1m));
+        }
     }
 }
