@@ -12,7 +12,7 @@ namespace com.exam.tests
         [Fact]
         public void ShouldReturnQuantityMultipliedByItemPrice()
         {
-            var orderItem = new OrderItem()
+            var orderItem = new MaterialItem()
             {
                 Item = new Item(1, "item1", .01m),
                 Quantity = 100

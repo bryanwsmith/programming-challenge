@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace com.exam
 {
     [Serializable]
-    public class OrderItem
+    public abstract class OrderItem
     {
         public Item Item { get; set; }
         public int Quantity { get; set; }
@@ -20,12 +20,9 @@ namespace com.exam
             return Item.Price * Quantity;
         }
 
-        public virtual decimal GetTaxableAmount()
-        {
-            return 0;
-        }
+        public abstract decimal GetTaxableAmount();
 
-        public virtual OrderItem Clone()
+        public OrderItem Clone()
         {
             var item = Create();
             item.Item = new Item(Item.Key, Item.Name, Item.Price);
@@ -34,9 +31,6 @@ namespace com.exam
             return item;
         }
 
-        public virtual OrderItem Create()
-        {
-            return new OrderItem();
-        }
+        public abstract OrderItem Create();
     }
 }
