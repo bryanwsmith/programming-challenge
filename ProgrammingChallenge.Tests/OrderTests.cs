@@ -125,11 +125,11 @@ namespace com.exam.tests
         {
             var items = new OrderItem[] {
                 new OrderItem {
-                    Item = new Item(1, "item1", .01m),
+                    Item = new Item(1, "item1", .10m),
                     ItemType =OrderItemType.Material,
                     Quantity =1 },
                 new OrderItem {
-                    Item = new Item(2, "item2", .02m),
+                    Item = new Item(2, "item2", .20m),
                     ItemType =OrderItemType.Material ,
                     Quantity =2
                 }
@@ -137,8 +137,27 @@ namespace com.exam.tests
 
             var order = new Order(items);
 
-            Assert.NotEqual(0, order.GetOrderTotal(0));
-            Assert.Equal(.05m, order.GetOrderTotal(0));
+            Assert.Equal(.50m, order.GetOrderTotal(0m));
+        }
+
+        [Fact]
+        public void ShouldReturnTotalCostOfAllOrderItemsPlusTaxes()
+        {
+            var items = new OrderItem[] {
+                new OrderItem {
+                    Item = new Item(1, "item1", .10m),
+                    ItemType =OrderItemType.Material,
+                    Quantity =1 },
+                new OrderItem {
+                    Item = new Item(2, "item2", .20m),
+                    ItemType =OrderItemType.Material ,
+                    Quantity =2
+                }
+            };
+
+            var order = new Order(items);
+
+            Assert.Equal(1m, order.GetOrderTotal(1m));
         }
     }
 }
