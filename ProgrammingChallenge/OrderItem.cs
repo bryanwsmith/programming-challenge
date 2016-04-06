@@ -11,9 +11,8 @@ namespace com.exam
     {
         public Item Item { get; set; }
         public int Quantity { get; set; }
-        public OrderItemType ItemType { get; set; }
 
-        public bool IsTaxable { get { return ItemType == OrderItemType.Material; } }
+        public abstract bool IsTaxable { get; }
 
         public decimal GetItemTotal()
         {
@@ -26,7 +25,6 @@ namespace com.exam
         {
             var item = Create();
             item.Item = new Item(Item.Key, Item.Name, Item.Price);
-            item.ItemType = ItemType;
             item.Quantity = Quantity;
             return item;
         }

@@ -9,6 +9,11 @@ namespace com.exam
     [Serializable]
     public class ServiceItem : OrderItem
     {
+        public override bool IsTaxable
+        {
+            get { return false; }
+        }
+
         public override decimal GetTaxableAmount()
         {
             //Service items are not taxable            

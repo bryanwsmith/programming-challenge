@@ -18,11 +18,9 @@ namespace com.exam.tests
             var items = new OrderItem[] {
                 new MaterialItem {
                     Item = new Item(1, "item1", .01m),
-                    ItemType =OrderItemType.Material,
                     Quantity =1 },
                 new MaterialItem {
                     Item = new Item(2, "item2", .02m),
-                    ItemType =OrderItemType.Material ,
                     Quantity =2
                 }
             };
@@ -30,19 +28,18 @@ namespace com.exam.tests
             var order = new Order(items);
 
             items[0].Item = new Item(3, "item3", .03m);
-            items[0].ItemType = OrderItemType.Service;
             items[0].Quantity = 3;
 
             Assert.DoesNotContain(order.GetItems(), (oi) => oi.Item.Key == 3);
             Assert.DoesNotContain(order.GetItems(), (oi) => oi.Item.Name == "item3");
             Assert.DoesNotContain(order.GetItems(), (oi) => oi.Item.Price == .03m);
-            Assert.DoesNotContain(order.GetItems(), (oi) => oi.ItemType == OrderItemType.Service);
+            Assert.DoesNotContain(order.GetItems(), (oi) => oi.GetType() == typeof(ServiceItem));
             Assert.DoesNotContain(order.GetItems(), (oi) => oi.Quantity == 3);
 
             Assert.Contains(order.GetItems(), (oi) => oi.Item.Key == 1);
             Assert.Contains(order.GetItems(), (oi) => oi.Item.Name == "item1");
             Assert.Contains(order.GetItems(), (oi) => oi.Item.Price == .01m);
-            Assert.Contains(order.GetItems(), (oi) => oi.ItemType == OrderItemType.Material);
+            Assert.Contains(order.GetItems(), (oi) => oi.GetType() == typeof(MaterialItem));
             Assert.Contains(order.GetItems(), (oi) => oi.Quantity == 1);
         }
 
@@ -52,11 +49,9 @@ namespace com.exam.tests
             var items = new OrderItem[] {
                 new MaterialItem {
                     Item = new Item(1, "item1", .01m),
-                    ItemType =OrderItemType.Material,
                     Quantity =1 },
                 new MaterialItem {
                     Item = new Item(2, "item2", .02m),
-                    ItemType =OrderItemType.Service ,
                     Quantity =2
                 }
             };
@@ -69,13 +64,13 @@ namespace com.exam.tests
             Assert.Contains(order.GetItems(), (oi) => oi.Item.Key == 1);
             Assert.Contains(order.GetItems(), (oi) => oi.Item.Name == "item1");
             Assert.Contains(order.GetItems(), (oi) => oi.Item.Price == .01m);
-            Assert.Contains(order.GetItems(), (oi) => oi.ItemType == OrderItemType.Material);
+            Assert.Contains(order.GetItems(), (oi) => oi.GetType() == typeof(MaterialItem));
             Assert.Contains(order.GetItems(), (oi) => oi.Quantity == 1);
 
             Assert.Contains(order.GetItems(), (oi) => oi.Item.Key == 2);
             Assert.Contains(order.GetItems(), (oi) => oi.Item.Name == "item2");
             Assert.Contains(order.GetItems(), (oi) => oi.Item.Price == .02m);
-            Assert.Contains(order.GetItems(), (oi) => oi.ItemType == OrderItemType.Material);
+            Assert.Contains(order.GetItems(), (oi) => oi.GetType() == typeof(MaterialItem));
             Assert.Contains(order.GetItems(), (oi) => oi.Quantity == 2);
         }
 
@@ -85,11 +80,9 @@ namespace com.exam.tests
             var items = new OrderItem[] {
                 new MaterialItem {
                     Item = new Item(1, "item1", .01m),
-                    ItemType =OrderItemType.Material,
                     Quantity =1 },
                 new MaterialItem {
                     Item = new Item(2, "item2", .02m),
-                    ItemType =OrderItemType.Material ,
                     Quantity =2
                 }
             };
@@ -110,13 +103,13 @@ namespace com.exam.tests
             Assert.Contains(order.GetItems(), (oi) => oi.Item.Key == 1);
             Assert.Contains(order.GetItems(), (oi) => oi.Item.Name == "item1");
             Assert.Contains(order.GetItems(), (oi) => oi.Item.Price == .01m);
-            Assert.Contains(order.GetItems(), (oi) => oi.ItemType == OrderItemType.Material);
+            Assert.Contains(order.GetItems(), (oi) => oi.GetType() == typeof(MaterialItem));
             Assert.Contains(order.GetItems(), (oi) => oi.Quantity == 1);
 
             Assert.Contains(order.GetItems(), (oi) => oi.Item.Key == 2);
             Assert.Contains(order.GetItems(), (oi) => oi.Item.Name == "item2");
             Assert.Contains(order.GetItems(), (oi) => oi.Item.Price == .02m);
-            Assert.Contains(order.GetItems(), (oi) => oi.ItemType == OrderItemType.Material);
+            Assert.Contains(order.GetItems(), (oi) => oi.GetType() == typeof(MaterialItem));
             Assert.Contains(order.GetItems(), (oi) => oi.Quantity == 2);
         }
 
@@ -126,11 +119,9 @@ namespace com.exam.tests
             var items = new OrderItem[] {
                 new MaterialItem {
                     Item = new Item(1, "item1", .10m),
-                    ItemType =OrderItemType.Material,
                     Quantity =1 },
                 new MaterialItem {
                     Item = new Item(2, "item2", .20m),
-                    ItemType =OrderItemType.Material ,
                     Quantity =2
                 }
             };
@@ -146,11 +137,9 @@ namespace com.exam.tests
             var items = new OrderItem[] {
                 new MaterialItem {
                     Item = new Item(1, "item1", .10m),
-                    ItemType =OrderItemType.Material,
                     Quantity =1 },
                 new MaterialItem {
                     Item = new Item(2, "item2", .20m),
-                    ItemType =OrderItemType.Material ,
                     Quantity =2
                 }
             };
@@ -166,11 +155,9 @@ namespace com.exam.tests
             var items = new OrderItem[] {
                 new MaterialItem {
                     Item = new Item(1, "item1", .10m),
-                    ItemType =OrderItemType.Material,
                     Quantity =1 },
                 new MaterialItem {
                     Item = new Item(2, "item2", .20m),
-                    ItemType =OrderItemType.Material ,
                     Quantity =2
                 }
             };
@@ -187,11 +174,9 @@ namespace com.exam.tests
             var items = new OrderItem[] {
                 new MaterialItem {
                     Item = new Item(1, "item1", .10m),
-                    ItemType =OrderItemType.Material,
                     Quantity =1 },
                 new MaterialItem {
                     Item = new Item(2, "item2", .20m),
-                    ItemType =OrderItemType.Material ,
                     Quantity =2
                 }
             };
@@ -208,11 +193,9 @@ namespace com.exam.tests
             var items = new OrderItem[] {
                 new ServiceItem {
                     Item = new Item(1, "item1", .10m),
-                    ItemType =OrderItemType.Service,
                     Quantity =1 },
                 new ServiceItem {
                     Item = new Item(2, "item2", .20m),
-                    ItemType =OrderItemType.Service ,
                     Quantity =2
                 }
             };
@@ -229,11 +212,9 @@ namespace com.exam.tests
             var items = new OrderItem[] {
                 new ServiceItem {
                     Item = new Item(1, "item1", .10m),
-                    ItemType =OrderItemType.Service,
                     Quantity =1 },
                 new MaterialItem {
                     Item = new Item(2, "item2", .20m),
-                    ItemType =OrderItemType.Material ,
                     Quantity =2
                 }
             };

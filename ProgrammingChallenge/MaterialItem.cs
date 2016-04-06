@@ -9,6 +9,11 @@ namespace com.exam
     [Serializable]
     public class MaterialItem : OrderItem
     {
+        public override bool IsTaxable
+        {
+            get { return true; }
+        }
+
         public override decimal GetTaxableAmount()
         {
             return GetItemTotal();

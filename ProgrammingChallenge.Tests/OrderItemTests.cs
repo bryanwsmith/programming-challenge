@@ -28,7 +28,6 @@ namespace com.exam.tests
             {
                 Item = new Item(1, "item1", .01m),
                 Quantity = 100,
-                ItemType = OrderItemType.Material
             };
 
             Assert.True(orderItem.IsTaxable);
@@ -41,7 +40,6 @@ namespace com.exam.tests
             {
                 Item = new Item(1, "item1", .01m),
                 Quantity = 100,
-                ItemType = OrderItemType.Service
             };
 
             Assert.False(orderItem.IsTaxable);
@@ -54,7 +52,6 @@ namespace com.exam.tests
             {
                 Item = new Item(1, "item1", .01m),
                 Quantity = 100,
-                ItemType = OrderItemType.Material
             };
 
             Assert.Equal(1, orderItem.GetTaxableAmount());
@@ -67,7 +64,6 @@ namespace com.exam.tests
             {
                 Item = new Item(1, "item1", .01m),
                 Quantity = 100,
-                ItemType = OrderItemType.Service
             };
 
             Assert.Equal(0, orderItem.GetTaxableAmount());
