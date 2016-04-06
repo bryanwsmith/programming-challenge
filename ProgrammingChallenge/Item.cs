@@ -36,6 +36,33 @@ namespace com.exam
         {
             return new Item(Key, Name, Price);
         }
+
+        public override bool Equals(Object obj)
+        {
+            Item item = obj as Item;
+            if (item == null)
+                return false;
+            else
+                return Key.Equals(item.Key);
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Key.GetHashCode();
+        }
+
+        //public override int GetHashCode()
+        //{
+        //    unchecked // Overflow is fine, just wrap
+        //    {
+        //        int hash = (int)2166136261;
+        //        // Suitable nullity checks etc, of course :)
+        //        hash = (hash * 16777619) ^ Key.GetHashCode();
+        //        hash = (hash * 16777619) ^ Name.GetHashCode();
+        //        hash = (hash * 16777619) ^ Price.GetHashCode();
+        //        return hash;
+        //    }
+        //}
     }
 }
 
