@@ -224,5 +224,50 @@ namespace com.exam.tests
             Assert.NotEqual(1m, order.GetOrderTotal(1m));
             Assert.Equal(.9m, order.GetOrderTotal(1m));
         }
+
+        [Fact]
+        public void ShouldReturnCollectionOfAllItemsSorteByItemName()
+        {
+            var items = new OrderItem[] {
+                new MaterialItem {
+                    Item = new Item(1, "item-z", .01m),
+                    Quantity =1
+                },
+                new MaterialItem {
+                    Item = new Item(1, "item-b", .01m),
+                    Quantity =1
+                },
+                new MaterialItem {
+                    Item = new Item(1, "item-x", .01m),
+                    Quantity =1
+                },
+               new MaterialItem {
+                    Item = new Item(1, "item-c", .01m),
+                    Quantity =1
+                },
+                new MaterialItem {
+                    Item = new Item(1, "item-y", .01m),
+                    Quantity =1
+                },
+                new MaterialItem {
+                    Item = new Item(1, "item-a", .01m),
+                    Quantity =1
+                }
+            };
+
+            var order = new Order(items);
+
+            var sorted = order.GetItems();
+
+            Assert.Equal(new List<Item>() {
+                    new Item(1, "item-a", .01m),
+                    new Item(1, "item-b", .01m),
+                    new Item(1, "item-c", .01m),
+                    new Item(1, "item-x", .01m),
+                    new Item(1, "item-y", .01m),
+                    new Item(1, "item-z", .01m),
+            }, sorted.Select(item => item.Item));
+        }
+
     }
 }

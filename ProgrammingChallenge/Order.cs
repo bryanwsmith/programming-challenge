@@ -64,7 +64,9 @@ namespace com.exam
          */
         public List<OrderItem> GetItems()
         {
-            return orderItems.ToList();
+            var sorted = orderItems.ToList();
+            sorted.Sort((item1, item2) => item1.Item.Name.CompareTo(item2.Item.Name));
+            return sorted;               
         }
     }
 }
