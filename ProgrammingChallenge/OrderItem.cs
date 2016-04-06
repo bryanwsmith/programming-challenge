@@ -19,5 +19,11 @@ namespace com.exam
         {
             return Item.Price * Quantity;
         }
+
+        public decimal GetTaxableAmount()
+        {
+            if (IsTaxable) return GetItemTotal();
+            return 0;
+        }
     }
 }
