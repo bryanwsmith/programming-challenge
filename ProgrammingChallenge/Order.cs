@@ -28,6 +28,11 @@ namespace com.exam
             this.orderItems = Clone(orderItems);
         }
 
+        private decimal GetTaxes(decimal taxRate)
+        {
+            return (GetTaxableAmount() * taxRate);
+        }
+
         private OrderItem[] Clone(OrderItem[] orderItems)
         {
             return orderItems.Select(i => new OrderItem()
@@ -39,15 +44,23 @@ namespace com.exam
             ).ToArray();
         }
 
+        private decimal GetItemsTotal()
+        {
+            return orderItems.Aggregate(0.0m, (sum, item) => sum + item.GetItemTotal());
+        }
+
         // Returns the total order cost after the tax has been applied
         public decimal GetOrderTotal(decimal taxRate)
         {
-            var total = orderItems.Aggregate(0.0m, (sum, item) => sum + item.GetItemTotal());
-            var taxableAmount = orderItems
+            var total = GetItemsTotal() + GetTaxes(taxRate);
+            return Math.Round(total, 2, MidpointRounding.AwayFromZero);
+        }
+
+        private decimal GetTaxableAmount()
+        {
+            return orderItems
                 .Where((item) => item.ItemType == OrderItemType.Material)
                 .Aggregate(0.0m, (sum, item) => sum + item.GetItemTotal());
-            total = (decimal)total + (taxableAmount * taxRate);
-            return Math.Round(total, 2, MidpointRounding.AwayFromZero);
         }
 
         /**
