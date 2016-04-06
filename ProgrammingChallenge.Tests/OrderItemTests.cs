@@ -20,5 +20,57 @@ namespace com.exam.tests
 
             Assert.Equal(1, orderItem.GetItemTotal());
         }
+
+        [Fact]
+        public void MaterialOrderItemShouldBeTaxable()
+        {
+            var orderItem = new OrderItem()
+            {
+                Item = new Item(1, "item1", .01m),
+                Quantity = 100,
+                ItemType = OrderItemType.Material
+            };
+
+            Assert.True(orderItem.IsTaxable);
+        }
+
+        [Fact]
+        public void ServiceOrderItemShouldNotBeTaxable()
+        {
+            var orderItem = new OrderItem()
+            {
+                Item = new Item(1, "item1", .01m),
+                Quantity = 100,
+                ItemType = OrderItemType.Service
+            };
+
+            Assert.False(orderItem.IsTaxable);
+        }
+
+        [Fact]
+        public void MaterialOrderItemShouldHaveTaxableAmount()
+        {
+            var orderItem = new OrderItem()
+            {
+                Item = new Item(1, "item1", .01m),
+                Quantity = 100,
+                ItemType = OrderItemType.Material
+            };
+
+            Assert.Equal(1, orderItem.GetTaxableAmount());
+        }
+
+        [Fact]
+        public void ServiceOrderItemShouldNotHaveTaxableAmount()
+        {
+            var orderItem = new OrderItem()
+            {
+                Item = new Item(1, "item1", .01m),
+                Quantity = 100,
+                ItemType = OrderItemType.Service
+            };
+
+            Assert.Equal(0, orderItem.GetTaxableAmount());
+        }
     }
 }
