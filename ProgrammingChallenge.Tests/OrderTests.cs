@@ -159,5 +159,47 @@ namespace com.exam.tests
 
             Assert.Equal(1m, order.GetOrderTotal(1m));
         }
+
+        [Fact]
+        public void ShouldRoundOrderTotalDownToNearestPenny()
+        {
+            var items = new OrderItem[] {
+                new OrderItem {
+                    Item = new Item(1, "item1", .10m),
+                    ItemType =OrderItemType.Material,
+                    Quantity =1 },
+                new OrderItem {
+                    Item = new Item(2, "item2", .20m),
+                    ItemType =OrderItemType.Material ,
+                    Quantity =2
+                }
+            };
+
+            var order = new Order(items);
+
+            Assert.NotEqual(.52m, order.GetOrderTotal(0.025m));
+            Assert.Equal(.51m, order.GetOrderTotal(0.025m));
+        }
+
+        [Fact]
+        public void ShouldRoundOrderTotalUpToNearestPenny()
+        {
+            var items = new OrderItem[] {
+                new OrderItem {
+                    Item = new Item(1, "item1", .10m),
+                    ItemType =OrderItemType.Material,
+                    Quantity =1 },
+                new OrderItem {
+                    Item = new Item(2, "item2", .20m),
+                    ItemType =OrderItemType.Material ,
+                    Quantity =2
+                }
+            };
+
+            var order = new Order(items);
+
+            Assert.NotEqual(.52m, order.GetOrderTotal(0.07m));
+            Assert.Equal(.54m, order.GetOrderTotal(0.07m));
+        }
     }
 }
