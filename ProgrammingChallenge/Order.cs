@@ -59,7 +59,7 @@ namespace com.exam
         private decimal GetTaxableAmount()
         {
             return orderItems
-                .Where((item) => item.ItemType == OrderItemType.Material)
+                .Where((item) => item.IsTaxable)
                 .Aggregate(0.0m, (sum, item) => sum + item.GetItemTotal());
         }
 

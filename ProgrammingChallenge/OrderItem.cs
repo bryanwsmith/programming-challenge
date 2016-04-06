@@ -13,6 +13,8 @@ namespace com.exam
         public int Quantity { get; set; }
         public OrderItemType ItemType { get; set; }
 
+        public bool IsTaxable { get {return ItemType == OrderItemType.Material; } }
+
         public decimal GetItemTotal()
         {
             return Item.Price * Quantity;
