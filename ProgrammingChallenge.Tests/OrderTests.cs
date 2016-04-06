@@ -16,11 +16,11 @@ namespace com.exam.tests
         public void ShouldNotBeAbleToChangeItems()
         {
             var items = new OrderItem[] {
-                new OrderItem {
+                new MaterialItem {
                     Item = new Item(1, "item1", .01m),
                     ItemType =OrderItemType.Material,
                     Quantity =1 },
-                new OrderItem {
+                new MaterialItem {
                     Item = new Item(2, "item2", .02m),
                     ItemType =OrderItemType.Material ,
                     Quantity =2
@@ -50,11 +50,11 @@ namespace com.exam.tests
         public void ShouldNotBeAbleToRemoveItems()
         {
             var items = new OrderItem[] {
-                new OrderItem {
+                new MaterialItem {
                     Item = new Item(1, "item1", .01m),
                     ItemType =OrderItemType.Material,
                     Quantity =1 },
-                new OrderItem {
+                new MaterialItem {
                     Item = new Item(2, "item2", .02m),
                     ItemType =OrderItemType.Service ,
                     Quantity =2
@@ -83,11 +83,11 @@ namespace com.exam.tests
         public void ShouldSerializeOrderItems()
         {
             var items = new OrderItem[] {
-                new OrderItem {
+                new MaterialItem {
                     Item = new Item(1, "item1", .01m),
                     ItemType =OrderItemType.Material,
                     Quantity =1 },
-                new OrderItem {
+                new MaterialItem {
                     Item = new Item(2, "item2", .02m),
                     ItemType =OrderItemType.Material ,
                     Quantity =2
@@ -124,11 +124,11 @@ namespace com.exam.tests
         public void ShouldReturnTotalCostOfAllOrderItems()
         {
             var items = new OrderItem[] {
-                new OrderItem {
+                new MaterialItem {
                     Item = new Item(1, "item1", .10m),
                     ItemType =OrderItemType.Material,
                     Quantity =1 },
-                new OrderItem {
+                new MaterialItem {
                     Item = new Item(2, "item2", .20m),
                     ItemType =OrderItemType.Material ,
                     Quantity =2
@@ -144,11 +144,11 @@ namespace com.exam.tests
         public void ShouldReturnTotalCostOfAllOrderItemsPlusTaxes()
         {
             var items = new OrderItem[] {
-                new OrderItem {
+                new MaterialItem {
                     Item = new Item(1, "item1", .10m),
                     ItemType =OrderItemType.Material,
                     Quantity =1 },
-                new OrderItem {
+                new MaterialItem {
                     Item = new Item(2, "item2", .20m),
                     ItemType =OrderItemType.Material ,
                     Quantity =2
@@ -164,11 +164,11 @@ namespace com.exam.tests
         public void ShouldRoundOrderTotalDownToNearestPenny()
         {
             var items = new OrderItem[] {
-                new OrderItem {
+                new MaterialItem {
                     Item = new Item(1, "item1", .10m),
                     ItemType =OrderItemType.Material,
                     Quantity =1 },
-                new OrderItem {
+                new MaterialItem {
                     Item = new Item(2, "item2", .20m),
                     ItemType =OrderItemType.Material ,
                     Quantity =2
@@ -185,11 +185,11 @@ namespace com.exam.tests
         public void ShouldRoundOrderTotalUpToNearestPenny()
         {
             var items = new OrderItem[] {
-                new OrderItem {
+                new MaterialItem {
                     Item = new Item(1, "item1", .10m),
                     ItemType =OrderItemType.Material,
                     Quantity =1 },
-                new OrderItem {
+                new MaterialItem {
                     Item = new Item(2, "item2", .20m),
                     ItemType =OrderItemType.Material ,
                     Quantity =2
@@ -206,11 +206,11 @@ namespace com.exam.tests
         public void ShouldNotCalculateTaxesForServiceOrderItems()
         {
             var items = new OrderItem[] {
-                new OrderItem {
+                new ServiceItem {
                     Item = new Item(1, "item1", .10m),
                     ItemType =OrderItemType.Service,
                     Quantity =1 },
-                new OrderItem {
+                new ServiceItem {
                     Item = new Item(2, "item2", .20m),
                     ItemType =OrderItemType.Service ,
                     Quantity =2
@@ -227,11 +227,11 @@ namespace com.exam.tests
         public void ShouldOnlyCalculateTaxesForMaterialOrderItems()
         {
             var items = new OrderItem[] {
-                new OrderItem {
+                new ServiceItem {
                     Item = new Item(1, "item1", .10m),
                     ItemType =OrderItemType.Service,
                     Quantity =1 },
-                new OrderItem {
+                new MaterialItem {
                     Item = new Item(2, "item2", .20m),
                     ItemType =OrderItemType.Material ,
                     Quantity =2

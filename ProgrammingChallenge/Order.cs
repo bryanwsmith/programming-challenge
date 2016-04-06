@@ -35,13 +35,7 @@ namespace com.exam
 
         private OrderItem[] Clone(OrderItem[] orderItems)
         {
-            return orderItems.Select(i => new OrderItem()
-            {
-                Item = new Item(i.Item.Key, i.Item.Name, i.Item.Price),
-                ItemType = i.ItemType,
-                Quantity = i.Quantity
-            }
-            ).ToArray();
+            return orderItems.Select(i => i.Clone()).ToArray();
         }
 
         private decimal GetItemsTotal()

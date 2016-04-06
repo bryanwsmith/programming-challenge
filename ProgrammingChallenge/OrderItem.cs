@@ -13,17 +13,30 @@ namespace com.exam
         public int Quantity { get; set; }
         public OrderItemType ItemType { get; set; }
 
-        public bool IsTaxable { get {return ItemType == OrderItemType.Material; } }
+        public bool IsTaxable { get { return ItemType == OrderItemType.Material; } }
 
         public decimal GetItemTotal()
         {
             return Item.Price * Quantity;
         }
 
-        public decimal GetTaxableAmount()
+        public virtual decimal GetTaxableAmount()
         {
-            if (IsTaxable) return GetItemTotal();
             return 0;
+        }
+
+        public virtual OrderItem Clone()
+        {
+            var item = Create();
+            item.Item = new Item(Item.Key, Item.Name, Item.Price);
+            item.ItemType = ItemType;
+            item.Quantity = Quantity;
+            return item;
+        }
+
+        public virtual OrderItem Create()
+        {
+            return new OrderItem();
         }
     }
 }

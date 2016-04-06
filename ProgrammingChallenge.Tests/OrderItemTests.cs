@@ -24,7 +24,7 @@ namespace com.exam.tests
         [Fact]
         public void MaterialOrderItemShouldBeTaxable()
         {
-            var orderItem = new OrderItem()
+            var orderItem = new MaterialItem()
             {
                 Item = new Item(1, "item1", .01m),
                 Quantity = 100,
@@ -37,7 +37,7 @@ namespace com.exam.tests
         [Fact]
         public void ServiceOrderItemShouldNotBeTaxable()
         {
-            var orderItem = new OrderItem()
+            var orderItem = new ServiceItem()
             {
                 Item = new Item(1, "item1", .01m),
                 Quantity = 100,
@@ -50,7 +50,7 @@ namespace com.exam.tests
         [Fact]
         public void MaterialOrderItemShouldHaveTaxableAmount()
         {
-            var orderItem = new OrderItem()
+            var orderItem = new MaterialItem()
             {
                 Item = new Item(1, "item1", .01m),
                 Quantity = 100,
@@ -63,7 +63,7 @@ namespace com.exam.tests
         [Fact]
         public void ServiceOrderItemShouldNotHaveTaxableAmount()
         {
-            var orderItem = new OrderItem()
+            var orderItem = new ServiceItem()
             {
                 Item = new Item(1, "item1", .01m),
                 Quantity = 100,
